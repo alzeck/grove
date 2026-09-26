@@ -1,0 +1,31 @@
+[package]
+name = "grove-core"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[dependencies]
+async-trait.workspace = true
+bytes.workspace = true
+futures.workspace = true
+grove-config.workspace = true
+grove-db.workspace = true
+grove-git.workspace = true
+grove-github.workspace = true
+grove-proc.workspace = true
+grove-proxy.workspace = true
+indexmap.workspace = true
+parking_lot.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true
+tokio.workspace = true
+tokio-stream.workspace = true
+toml.workspace = true
+tracing.workspace = true
+which.workspace = true
+
+[dev-dependencies]
+grove-proxy.workspace = true
+tempfile.workspace = true

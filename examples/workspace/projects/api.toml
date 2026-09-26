@@ -1,0 +1,29 @@
+name = "api"
+repo = "git@github.com:acme/api.git"
+
+# Instant APFS copies from the main clone into new worktrees.
+copy_from_original = [".env", "node_modules"]
+setup = ["pnpm install --prefer-offline"]
+after_pull = ["pnpm install --prefer-offline"]
+
+[env]
+FRONTEND_URL = "{{ projects.web.app.url }}"
+
+[database]
+name = "api_dev"
+env = "DATABASE_URL"
+default = "shared"     # each cluster can pick shared or fresh
+fresh = "dump"         # dump | template | migrate
+migrate = "pnpm db:migrate"
+seed = "pnpm db:seed"
+
+[processes.server]
+run = "pnpm dev"
+port = { env = "PORT", default = 3000 }
+ready = { http = "/health" }
+domain = true
+
+[processes.worker]
+run = "pnpm worker"
+depends_on = ["server"]
+env = { QUEUE_PREFIX = "{{ cluster }}" }

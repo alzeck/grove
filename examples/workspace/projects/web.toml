@@ -1,0 +1,14 @@
+name = "web"
+repo = "git@github.com:acme/web.git"
+
+copy_from_original = [".env.local", "node_modules"]
+setup = ["pnpm install --prefer-offline"]
+
+[processes.app]
+run = "pnpm dev --port $PORT"
+port = { env = "PORT", default = 5173 }
+ready = { http = "/" }
+# Tenants live on subdomains: acme.web.localhost, acme.web-pr-12.localhost…
+domain = { wildcard = true }
+depends_on = ["api.server"]
+env = { VITE_API_URL = "{{ projects.api.server.url }}" }

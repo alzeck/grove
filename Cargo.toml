@@ -1,0 +1,68 @@
+[workspace]
+resolver = "3"
+members = ["crates/*"]
+default-members = ["crates/grove-app"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+license = "MIT"
+publish = false
+
+[workspace.dependencies]
+grove-config = { path = "crates/grove-config" }
+grove-core = { path = "crates/grove-core" }
+grove-db = { path = "crates/grove-db" }
+grove-git = { path = "crates/grove-git" }
+grove-github = { path = "crates/grove-github" }
+grove-ipc = { path = "crates/grove-ipc" }
+grove-proc = { path = "crates/grove-proc" }
+grove-proxy = { path = "crates/grove-proxy" }
+grove-term = { path = "crates/grove-term" }
+
+anyhow = "1"
+async-trait = "0.1"
+bytes = "1"
+clap = { version = "4.6", features = ["derive"] }
+dirs = "7"
+futures = "0.3"
+glob = "0.3"
+http = "1"
+http-body-util = "0.1"
+humantime = "2"
+hyper = { version = "1", features = ["full"] }
+hyper-util = { version = "0.1", features = ["full"] }
+indexmap = { version = "2", features = ["serde"] }
+libc = "0.2"
+minijinja = "2"
+parking_lot = "0.12"
+portable-pty = "0.9"
+rcgen = "0.14"
+regex = "1"
+rustls = { version = "0.23", default-features = false, features = ["ring", "std", "tls12", "logging"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+strip-ansi-escapes = "0.2"
+tempfile = "3"
+thiserror = "2"
+time = "0.3"
+tokio = { version = "1", features = ["full"] }
+tokio-postgres = "0.7"
+tokio-stream = { version = "0.1", features = ["sync"] }
+tokio-rustls = { version = "0.26", default-features = false, features = ["ring", "logging", "tls12"] }
+toml = "1"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+which = "8"
+
+gpui-kit = "0.6.6"
+# crates.io 0.2.1 builds a Ghostty that needs Zig 0.15, which can't link on
+# macOS 27; this rev builds with Zig 0.16. Switch back once 0.2.2+ is out.
+libghostty-vt = { git = "https://github.com/Uzaaft/libghostty-rs", rev = "1f135a350c85a44711e6a66d8ce7344a874489a8" }
+
+[profile.dev]
+# GPUI is slow in unoptimised builds; optimise dependencies only.
+debug = "line-tables-only"
+
+[profile.dev.package."*"]
+opt-level = 2

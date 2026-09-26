@@ -1,0 +1,11 @@
+# An example workspace: a Node API with Postgres and a web frontend.
+# Point Grove at this directory (or a git repo containing it) during onboarding.
+name = "acme"
+idle_timeout = "30m"
+
+[domains]
+default = "{{ project }}.localhost"
+cluster = "{{ project }}-{{ cluster }}.localhost"
+
+[postgres]
+url = "postgres://localhost:5432"

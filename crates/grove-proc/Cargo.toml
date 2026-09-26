@@ -1,0 +1,23 @@
+[package]
+name = "grove-proc"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[dependencies]
+bytes.workspace = true
+grove-config.workspace = true
+libc.workspace = true
+parking_lot.workspace = true
+portable-pty.workspace = true
+regex.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+strip-ansi-escapes.workspace = true
+thiserror.workspace = true
+tokio.workspace = true
+tracing.workspace = true
+
+[dev-dependencies]
+tempfile.workspace = true

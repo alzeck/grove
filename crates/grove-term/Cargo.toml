@@ -1,0 +1,19 @@
+[package]
+name = "grove-term"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[dependencies]
+bytes.workspace = true
+futures.workspace = true
+gpui-kit.workspace = true
+libghostty-vt.workspace = true
+parking_lot.workspace = true
+tracing.workspace = true
+
+[dev-dependencies]
+anyhow.workspace = true
+gpui-kit = { workspace = true, features = ["test-support"] }
+portable-pty.workspace = true
